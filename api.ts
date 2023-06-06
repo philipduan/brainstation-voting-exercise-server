@@ -7,12 +7,7 @@ import "./db/mongoose";
 import { appRouter } from "./routers";
 import { createContext } from "./context";
 const app = express();
-app.use(
-  cors({
-    origin: process.env.ORIGIN_URL,
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(
   "/trpc",
