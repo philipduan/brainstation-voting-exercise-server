@@ -12,6 +12,7 @@ app.use(cors());
 app.use(
   "/trpc",
   createExpressMiddleware({
+    middleware: cors(),
     router: appRouter,
     createContext,
   })
