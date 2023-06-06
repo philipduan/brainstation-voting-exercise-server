@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "api.ts",
   "scripts": {
-    "start": "node api.ts",
+    "start": "ts-node --esm api.ts",
     "dev": "nodemon api.ts"
   },
   "dependencies": {
