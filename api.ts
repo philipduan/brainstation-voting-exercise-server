@@ -9,7 +9,7 @@ import { createContext } from "./context";
 const app = express();
 app.use(
   cors({
-    origin: true,
+    origin: process.env.ORIGIN_URL,
     credentials: true,
     methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
   })

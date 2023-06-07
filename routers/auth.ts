@@ -22,7 +22,6 @@ export const authRouter = t.router({
     )
     .mutation(async ({ input }) => {
       const user = await User.findOne({ username: input.username });
-      const token = generateBearerToken(user!._id.toString());
 
       if (!user) {
         throw new TRPCError({
@@ -30,6 +29,7 @@ export const authRouter = t.router({
           code: "NOT_FOUND",
         });
       }
+      const token = generateBearerToken(user!._id.toString());
       const result = await user!.comparePassword(input.password);
       if (!result) {
         throw new TRPCError({
