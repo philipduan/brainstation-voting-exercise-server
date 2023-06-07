@@ -7,20 +7,23 @@ import "./db/mongoose";
 import { appRouter } from "./routers";
 import { createContext } from "./context";
 const app = express();
-app.use(
-  cors({
-    origin: [process.env.ORIGIN_URL as string, "http://127.0.0.1:5173"],
-    credentials: true,
-  })
-);
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  // Pass to next layer of middleware
+  next();
+});
 
 app.use(
   "/trpc",
   createExpressMiddleware({
-    middleware: cors({
-      origin: [process.env.ORIGIN_URL as string, "http://127.0.0.1:5173"],
-      credentials: true,
-    }),
     router: appRouter,
     createContext,
   })
