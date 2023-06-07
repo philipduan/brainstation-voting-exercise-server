@@ -7,11 +7,17 @@ import "./db/mongoose";
 import { appRouter } from "./routers";
 import { createContext } from "./context";
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [process.env.ORIGIN_URL as string, "http://127.0.0.1:5173"],
+    credentials: true,
+  })
+);
 
 app.use(
   "/trpc",
   createExpressMiddleware({
+    middleware: cors(),
     router: appRouter,
     createContext,
   })
@@ -23,4 +29,4 @@ app.use(
     createContext,
   })
 );
-app.listen(process.env.PORT || 3000);
+app.listen(3000);
