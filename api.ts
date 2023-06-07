@@ -17,7 +17,10 @@ app.use(
 app.use(
   "/trpc",
   createExpressMiddleware({
-    middleware: cors(),
+    middleware: cors({
+      origin: [process.env.ORIGIN_URL as string, "http://127.0.0.1:5173"],
+      credentials: true,
+    }),
     router: appRouter,
     createContext,
   })
